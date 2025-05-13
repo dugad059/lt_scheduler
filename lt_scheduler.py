@@ -1,7 +1,14 @@
 import re
+import os
+from dotenv import load_dotenv
 from datetime import datetime, timedelta
 from playwright.sync_api import Playwright, sync_playwright
 import time
+
+load_dotenv()
+
+username = os.getenv("USERNAME")
+password = os.getenv("PASSWORD")
 
 def get_next_tuesday_label():
     today = datetime.today()
@@ -18,8 +25,8 @@ def run(playwright: Playwright) -> None:
     page.goto("https://my.lifetime.life/login.html?resource=%2Fclubs%2Ffl%2Fharbour-island.html")
     page.get_by_role("button", name="Close").click()
     page.get_by_role("textbox", name="Username, Email, or Member ID").click()
-    page.get_by_role("textbox", name="Username, Email, or Member ID").fill("daviddugas1@gmail.com")
-    page.get_by_role("textbox", name="Password").fill("Bic10102022$")
+    page.get_by_role("textbox", name="Username, Email, or Member ID").fill(username)
+    page.get_by_role("textbox", name="Password").fill(password)
     page.get_by_role("button", name=" Log In").click()
     page.get_by_role("button", name="Schedules").click()
     page.get_by_role("link", name="Court Reservations").click()
