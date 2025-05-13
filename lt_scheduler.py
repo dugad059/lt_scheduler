@@ -19,7 +19,7 @@ def get_next_tuesday_label():
     return next_tuesday.strftime("Tuesday %-m/%-d")  # Unix/Mac
 
 def run(playwright: Playwright) -> None:
-    browser = playwright.chromium.launch(headless=False)
+    browser = playwright.chromium.launch(headless=True)
     context = browser.new_context()
     page = context.new_page()
     page.goto("https://my.lifetime.life/login.html?resource=%2Fclubs%2Ffl%2Fharbour-island.html")
