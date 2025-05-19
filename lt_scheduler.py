@@ -15,18 +15,19 @@ def get_next_tuesday_label():
     days_until_next_tuesday = (1 - today.weekday() + 7) % 7
     if days_until_next_tuesday == 0:
         days_until_next_tuesday = 7  # It's Tuesday today → go to next Tuesday
-    next_tuesday = today + timedelta(days=days_until_next_tuesday)
-    return next_tuesday.strftime("Tuesday %-m/%-d")  # Unix/Mac
+    # Add 7 more days to get the *second* Tuesday from now
+    next_next_tuesday = today + timedelta(days=days_until_next_tuesday + 7)
+    return next_next_tuesday.strftime("Tuesday %-m/%-d")  # Unix/Mac
 
 def run(playwright: Playwright) -> None:
     browser = playwright.chromium.launch(headless=True)
     context = browser.new_context()
     page = context.new_page()
     page.goto("https://my.lifetime.life/login.html?resource=%2Fclubs%2Ffl%2Fharbour-island.html")
-    page.get_by_role("button", name="Close").click()
     page.get_by_role("textbox", name="Username, Email, or Member ID").click()
     page.get_by_role("textbox", name="Username, Email, or Member ID").fill(username)
     page.get_by_role("textbox", name="Password").fill(password)
+    page.get_by_role("button", name="Close").click()
     page.get_by_role("button", name=" Log In").click()
     page.get_by_role("button", name="Schedules").click()
     page.get_by_role("link", name="Court Reservations").click()
