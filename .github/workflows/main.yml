@@ -3,7 +3,7 @@ name: Run LT Scheduler Script
 on:
   workflow_dispatch:  # manually triggered
   schedule:
-    - cron: "0 21 * * 1"  # optional: every Monday at 2 PM UTC
+    - cron: "35 19 * * 1"
 
 jobs:
   run-script:
