@@ -43,12 +43,9 @@ def run(playwright: Playwright) -> None:
     page.get_by_test_id("startTime-toggle").click()
     page.get_by_test_id("startTime-options").get_by_text("6:30 PM").click()
 
-    page.get_by_test_id("duration-toggle").click()
-    page.get_by_text("90 Minutes").click()
     page.get_by_test_id("resourceBookingModalApplyFiltersBtn").click()
 
-    # Use specific court slot if needed (optional fallback if above doesn't cover court selection)
-    page.get_by_role("link", name="6:30 PM Court 5").click()
+    page.get_by_role("link", name=":30 PM Court 5").click()
 
     page.get_by_test_id("acceptWaiver").locator("span").click()
     page.get_by_test_id("finishBtn").click()
